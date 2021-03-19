@@ -32,9 +32,9 @@ namespace View
 
                 string menuConfirmacao = "\n                                     Confira se os dados a seguir estão corretos: " +
                     "\n" +
-                    "\n> Nome informado: (" + nome + ")" +
-                    "\n> Telefone informado: (" + telefone + ")" +
-                    "\n> CPF informado: (" + cpf + ")" +
+                    "\n> Nome informado: ( " + nome + " )" +
+                    "\n> Telefone informado: ( " + telefone + " )" +
+                    "\n> CPF informado: ( " + cpf + " )" +
                     "\n" +
                     "\n                      Digite [Sim] caso estiver correto e [Não] caso queira preencher novamente." +
                     "\n";

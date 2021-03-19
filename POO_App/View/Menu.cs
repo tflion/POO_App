@@ -38,6 +38,12 @@ namespace View
                         MenuCadastro.ExibirCadastroCliente();
 
                         break;
+
+                    case 2:
+
+                        MenuListar.ExibirListaClientes();
+
+                        break;
                 }
 
                 if(escolha == SAIR)

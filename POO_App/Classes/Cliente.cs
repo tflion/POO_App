@@ -41,7 +41,7 @@ namespace Classes
 
                         var clienteArquivo = linha.Split(";");
 
-                        var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[3]);
+                        var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[2]);
 
                         clientes.Add(cliente);
                     }

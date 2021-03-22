@@ -7,7 +7,7 @@ namespace View
 {
     class Menu
     {
-        public const int SAIR = 3;
+        public const int SAIR = 5;
         
 
         public static void Exibir()
@@ -22,9 +22,11 @@ namespace View
                     "\n" +
                     "\n                                                   O que deseja fazer?" +
                     "\n" +
-                    "\n                                         [1]     Cadastrar um novo cliente. " + 
-                    "\n                                         [2]  Listar os clientes cadastrados." +
-                    "\n                                         [3]         Sair do programa." +
+                    "\n                                        [1]      Cadastrar um novo cliente. " +
+                    "\n                                        [2]     Cadastrar um novo estoquista. " +
+                    "\n                                        [3]   Listar os clientes cadastrados." +
+                    "\n                                        [4]  Listar os estoquistas cadastrados." +
+                    "\n                                        [5]         Sair do programa." +
                     "\n\n";
 
                 Console.WriteLine(textoMenu);
@@ -41,9 +43,20 @@ namespace View
 
                     case 2:
 
+                        MenuCadastro.ExibirCadastroEstoquista();
+
+                        break;
+                    case 3:
+
                         MenuListar.ExibirListaClientes();
 
                         break;
+                    case 4:
+
+                        MenuListar.ExibirListaEstoquistas();
+                        
+                        break;
+
                 }
 
                 if(escolha == SAIR)

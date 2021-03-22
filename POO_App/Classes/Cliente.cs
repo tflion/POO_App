@@ -20,9 +20,12 @@ namespace Classes
             this.CPF = cpf;
         }
 
+        public Cliente() { }
+        
+
         private static string caminhoDatabase()
         {
-            return ConfigurationManager.AppSettings["caminho_db"];
+            return ConfigurationManager.AppSettings["caminho_clientes"];
         }
         
         public static List<Cliente> LerClientes()
@@ -31,26 +34,25 @@ namespace Classes
 
             if (File.Exists(caminhoDatabase()))
             {
-                using (StreamReader arquivo = File.OpenText(caminhoDatabase())){
-                    string linha;
-                    int i = 0;
-                    while ((linha = arquivo.ReadLine()) != null)
-                    {
-                        i++;
-                        if (i == 1) continue;
+                using StreamReader arquivo = File.OpenText(caminhoDatabase());
+                string linha;
+                int i = 0;
+                while ((linha = arquivo.ReadLine()) != null)
+                {
+                    i++;
+                    if (i == 1) continue;
 
-                        var clienteArquivo = linha.Split(";");
+                    var clienteArquivo = linha.Split(";");
 
-                        var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[2]);
+                    var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[2]);
 
-                        clientes.Add(cliente);
-                    }
+                    clientes.Add(cliente);
                 }
             }
             return clientes;
         }
 
-        public void Salvar()
+        public virtual void Salvar()
         {
             var clientes = Cliente.LerClientes();
             clientes.Add(this);
@@ -66,11 +68,8 @@ namespace Classes
                     w.WriteLine(linha);
                 }
 
-
                 w.Close();
             }
-
-
         }
 
 

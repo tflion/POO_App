@@ -57,6 +57,14 @@ namespace View
                         
                         break;
 
+                    case 5: break;
+                    
+                    default:
+
+                        MenuListar.ExibirMensagemErro();
+
+                        break;
+
                 }
 
                 if(escolha == SAIR)

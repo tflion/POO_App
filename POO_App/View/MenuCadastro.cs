@@ -89,7 +89,7 @@ namespace View
                 string telefone = Console.ReadLine();
                 Console.Write("> CPF do estoquista: ");
                 string cpf = Console.ReadLine();
-                Console.Write("> Endreço do estoquista: ");
+                Console.Write("> Endereço do estoquista: ");
                 string endereco = Console.ReadLine();
                 Console.Write("> Qual o produto deste estoquista: ");
                 string tipoEstoque = Console.ReadLine();
@@ -121,9 +121,9 @@ namespace View
                    || confirmacao == "siM"
                    || confirmacao == "sIm")
                 {
-                    Cliente Estoquista = new Estoquista(nome, telefone, cpf, endereco, tipoEstoque);
+                    Estoquista estoquista = new Estoquista(nome, telefone, cpf, endereco, tipoEstoque);
 
-                    Estoquista.Salvar();
+                    estoquista.Salvar();
 
                     Console.Clear();
                     Console.WriteLine("\n\n                                            * Estoquista adicionado com sucesso! *");

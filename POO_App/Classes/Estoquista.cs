@@ -6,10 +6,8 @@ using System.Text;
 
 namespace Classes
 {
-    class Estoquista : Cliente
+    class Estoquista : Base
     {
-        public string Endereco;
-        public string TipoEstoque;
 
         public Estoquista (string nome, string cpf, string telefone, string endereco, string tipoEstoque)
         {
@@ -20,19 +18,34 @@ namespace Classes
             this.TipoEstoque = tipoEstoque;
         }
 
+        public Estoquista() { }
 
-        private static string caminhoDatabase()
+        public override void Salvar()
         {
-            return ConfigurationManager.AppSettings["caminho_estoquistas"];
+            var data = this.Ler();
+            data.Add(this);
+
+
+            StreamWriter sw = new StreamWriter(caminhoDiretorio());
+            sw.WriteLine("nome;telefone;cpf;endereco;tipoEstoque");
+
+            foreach (Base d in data)
+            {
+                var linha = d.Nome + ";" + d.Telefone + ";" + d.CPF + ";" + d.Endereco + ";" + d.TipoEstoque + ";";
+                sw.WriteLine(linha);
+            }
+
+            sw.Close();
+
         }
 
-        public static List<Estoquista> LerEstoquistas()
+        public override List<IPessoa> Ler()
         {
-            var estoquistas = new List<Estoquista>();
+            var data = new List<IPessoa>();
 
-            if (File.Exists(caminhoDatabase()))
+            if (File.Exists(caminhoDiretorio()))
             {
-                using StreamReader arquivo = File.OpenText(caminhoDatabase());
+                using StreamReader arquivo = File.OpenText(caminhoDiretorio());
                 string linha;
                 int i = 0;
                 while ((linha = arquivo.ReadLine()) != null)
@@ -40,34 +53,20 @@ namespace Classes
                     i++;
                     if (i == 1) continue;
 
-                    var estoquistaArquivo = linha.Split(";");
+                    var dadoArquivo = linha.Split(";");
 
-                    var estoquista = new Estoquista(estoquistaArquivo[0], estoquistaArquivo[1], estoquistaArquivo[2], estoquistaArquivo[3], estoquistaArquivo[4]);
+                    var d = (IPessoa)Activator.CreateInstance(this.GetType());
 
-                    estoquistas.Add(estoquista);
+                    d.setNome(dadoArquivo[0]);
+                    d.setTelefone(dadoArquivo[1]);
+                    d.setCPF(dadoArquivo[2]);
+                    d.setEndereco(dadoArquivo[3]);
+                    d.setTipoEstoque(dadoArquivo[4]);
+
+                    data.Add(d);
                 }
             }
-            return estoquistas;
-        }
-
-        public override void Salvar()
-        {
-            var estoquistas = Estoquista.LerEstoquistas();
-            estoquistas.Add(this);
-
-            if (File.Exists(caminhoDatabase()))
-            {
-                StreamWriter w = new StreamWriter(caminhoDatabase());
-                w.WriteLine("nome;telefone;cpf;endereço;tipoEstoque");
-
-                foreach (Estoquista e in estoquistas)
-                {
-                    var linha = e.Nome + ";" + e.Telefone + ";" + e.CPF + ";" + e.Endereco + ";" + e.TipoEstoque + ";";
-                    w.WriteLine(linha);
-                }
-
-                w.Close();
-            }
+            return data;
         }
     }
 }

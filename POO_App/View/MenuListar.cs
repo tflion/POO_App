@@ -16,13 +16,12 @@ namespace View
 
             Console.WriteLine(menuListagem);
 
-            var clientes = Cliente.LerClientes();
 
-            foreach(Cliente cli in clientes)
+            foreach(Cliente cliente in new Cliente().Ler())
             {
-                string listagem = "Nome: " + cli.Nome + 
-                    "\nTelefone: " + cli.Telefone +
-                    "\nCPF: " + cli.CPF + 
+                string listagem = "Nome: " + cliente.Nome + 
+                    "\nTelefone: " + cliente.Telefone +
+                    "\nCPF: " + cliente.CPF + 
                     "\n---------------------------------------]";
                               
                 Console.WriteLine(listagem);
@@ -41,15 +40,13 @@ namespace View
 
             Console.WriteLine(menuListagem);
 
-            var estoquistas = Estoquista.LerEstoquistas();
-
-            foreach (Estoquista est in estoquistas)
+            foreach (Estoquista estoquista in new Estoquista().Ler())
             {
-                string listagem = "Nome: " + est.Nome +
-                    "\nTelefone: " + est.Telefone +
-                    "\nCPF: " + est.CPF +
-                    "\nEndereço: " + est.Endereco +
-                    "\nTipo Estoque: " + est.TipoEstoque +
+                string listagem = "Nome: " + estoquista.Nome +
+                    "\nTelefone: " + estoquista.Telefone +
+                    "\nCPF: " + estoquista.CPF +
+                    "\nEndereço: " + estoquista.Endereco +
+                    "\nTipo Estoque: " + estoquista.TipoEstoque +
                     "\n---------------------------------------]";
 
                 Console.WriteLine(listagem);
@@ -57,6 +54,20 @@ namespace View
             }
             Console.WriteLine("\n                                     Pressione 'ENTER' para retornar ao menu inicial.");
             Console.ReadLine();
+        }
+
+        public static void ExibirMensagemErro()
+        {
+            Console.Clear();
+
+            string error = "\n                                                    * OPÇÃO INVÁLIDA *" +
+                "\n\n                     Você informou um valor inválido, favor selecionar uma das opções citadas no menu." +
+                "\n\n                                     Pressione 'ENTER' para retornar ao menu inicial.";
+
+
+            Console.WriteLine(error);
+            Console.ReadLine();
+
         }
     }
 }
